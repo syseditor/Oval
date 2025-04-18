@@ -11,6 +11,7 @@ public:
     Complex(R real, I imag);
     R get_real_part();
     I get_imaginary_part();
+    double modulus();
     std::string to_string() const;
 };
 

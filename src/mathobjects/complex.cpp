@@ -17,6 +17,12 @@ I Complex<R, I>::get_imaginary_part() {
 }
 
 template<typename R, typename I>
+double Complex<R, I>::modulus() {
+    return sqrt(pow(this->real, 2) + pow(this->imag, 2));
+}
+
+
+template<typename R, typename I>
 std::string Complex<R, I>::to_string() const {
     std::stringstream complex_stringstream;
     complex_stringstream << this->real << "+" << this->imag << "i";
@@ -122,4 +128,26 @@ bool operator==(Complex<R1, I1> &complex1, Complex<R2, I2> &complex2) {
 template<typename R1, typename I1, typename R2, typename I2>
 bool operator!=(Complex<R1, I1> &complex1, Complex<R2, I2> &complex2) {
     return !(complex1 == complex2);
+}
+
+template<typename R, typename I>
+std::ostream &operator<<(std::ostream &os, Complex<R, I> &complex) {
+    return os << complex.to_string();
+}
+
+template<typename R, typename I>
+std::istream &operator>>(std::istream &is, Complex<R, I> &complex) {
+    R real;
+    I imag;
+    char char1, char2, char3;
+    is >> char1 >> real >> char2 >> imag >> char3;
+    if(!is) return is;
+    if(char1 != '(' && char2 != ',' && char3 != ')') {
+        is.clear(std::ios_base::failbit);
+        return is;
+    }
+
+    complex = Complex<R, I>(real, imag);
+
+    return is;
 }
