@@ -8,7 +8,7 @@ class Complex final {
     R real;
     I imag;
 public:
-    Complex(R real, I imag);
+    explicit Complex(R real = 0, I imag = 0);
     R get_real_part();
     I get_imaginary_part();
     double modulus();

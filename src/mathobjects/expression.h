@@ -4,11 +4,10 @@
 #include "complex.h"
 #include <vector>
 
-template<typename R, typename I>
+template<typename T>
 union Number{
-    int integer;
-    double real;
-    Complex<R, I> complex;
+    T value;
+    Number(T value);
 };
 
 class Expression {
@@ -22,21 +21,18 @@ class NumericalExpression final : public Expression{
     bool complex_numbers;
     std::vector<bool> complex_number_types; // false for int, true for double(float counts too)
 
-    std::vector<bool> get_complex_number_types_vector();
-    auto compute_complex_num_typeof_real();
-    auto compute_complex_num_typeof_imag();
 public:
-    NumericalExpression(std::string &expr, bool has_complex_numbers, std::vector<bool> complex_number_types);
-    bool has_complex_numbers() const;
-
-    constexpr Number<auto, auto> evaluate();
+    NumericalExpression(std::string &expr, bool has_complex_numbers, std::vector<bool> complex_number_types = std::vector<bool>{false, true});
+    bool has_complex_numbers() const noexcept;
+    template<typename T> constexpr Number<T> &evaluate();
 };
 
 class VariableExpression final : public Expression{
     std::vector<char> independent_variables;
 public:
-    VariableExpression(std::string &expr, std::vector<char> independent_variables);
-    constexpr Number<auto, auto> evaluate();
+    VariableExpression(std::string &expr, std::vector<char> &independent_variables);
+    std::vector<char> &get_independent_variables() noexcept;
+    template<typename T> constexpr Number<T> &evaluate(T values[]);
 };
 
 #endif //EXPRESSION_H

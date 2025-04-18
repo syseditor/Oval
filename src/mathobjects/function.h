@@ -12,8 +12,8 @@ class Function final {
     std::vector<char> arguments;
     std::unique_ptr<Expression> expr;
 public:
-    Function(std::string identifier, std::vector<char> arguments, Expression &expr);
-    Result &calculate(std::vector<> )
+    Function(std::string &identifier, std::vector<char> &arguments, Expression &expr);
+     &calculate(std::vector<> )
 };
 
 #endif //FUNCTION_H
