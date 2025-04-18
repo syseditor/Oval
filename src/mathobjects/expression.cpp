@@ -35,7 +35,7 @@ std::vector<char> &VariableExpression::get_independent_variables() noexcept {
 }
 
 template<typename T>
-constexpr Number<T> &NumericalExpression::evaluate() {
+Number<T> &NumericalExpression::evaluate() {
     if(this->has_complex_numbers()) {
         Number<T> result{T()};
         //parsing complex num expr...
@@ -49,7 +49,7 @@ constexpr Number<T> &NumericalExpression::evaluate() {
 }
 
 template<typename T>
-constexpr Number<T> &VariableExpression::evaluate(T values[]) {
+Number<T> &VariableExpression::evaluate(T values[]) {
     std::string expr = this->expr;
     // Replace variables with numbers...
     NumericalExpression numExpr{expr, false, std::vector<bool>{false, false}};

@@ -13,7 +13,7 @@ class Function final {
     std::unique_ptr<Expression> expr;
 public:
     Function(std::string &identifier, std::vector<char> &arguments, Expression &expr);
-     &calculate(std::vector<> )
+    template<typename T> const Number<T> &calculate(std::vector<T> values);
 };
 
 #endif //FUNCTION_H

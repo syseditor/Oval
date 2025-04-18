@@ -7,7 +7,7 @@
 template<typename T>
 union Number{
     T value;
-    Number(T value);
+    explicit Number(T value);
 };
 
 class Expression {
@@ -24,7 +24,7 @@ class NumericalExpression final : public Expression{
 public:
     NumericalExpression(std::string &expr, bool has_complex_numbers, std::vector<bool> complex_number_types = std::vector<bool>{false, true});
     bool has_complex_numbers() const noexcept;
-    template<typename T> constexpr Number<T> &evaluate();
+    template<typename T> Number<T> &evaluate();
 };
 
 class VariableExpression final : public Expression{
@@ -32,7 +32,7 @@ class VariableExpression final : public Expression{
 public:
     VariableExpression(std::string &expr, std::vector<char> &independent_variables);
     std::vector<char> &get_independent_variables() noexcept;
-    template<typename T> constexpr Number<T> &evaluate(T values[]);
+    template<typename T> Number<T> &evaluate(T values[]);
 };
 
 #endif //EXPRESSION_H
